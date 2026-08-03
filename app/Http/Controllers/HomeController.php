@@ -50,4 +50,34 @@ class HomeController extends Controller
 
         return view('home', compact('categories', 'products'));
     }
+
+    public function helpCenter()
+    {
+        return view('pages.help_center');
+    }
+
+    public function shoppingGuide()
+    {
+        return view('pages.shopping_guide');
+    }
+
+    public function authGuide()
+    {
+        return view('pages.auth_guide');
+    }
+
+    public function about()
+    {
+        return view('pages.about');
+    }
+
+    public function careers()
+    {
+        return view('pages.careers');
+    }
+
+    public function terms()
+    {
+        return view('pages.terms');
+    }
 }

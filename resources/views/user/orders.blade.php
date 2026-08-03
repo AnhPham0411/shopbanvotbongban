@@ -15,6 +15,7 @@
                 </div>
                 <ul style="list-style: none; padding-left: 0; margin: 0; font-size: 1.4rem;">
                     <li style="margin-bottom: 15px;"><a href="{{ route('profile') }}" style="color: #333; text-decoration: none;"><i class="fas fa-user" style="color: #1a94ff; width: 20px;"></i> Tài khoản của tôi</a></li>
+                    <li style="margin-bottom: 15px;"><a href="{{ route('addresses.index') }}" style="color: #333; text-decoration: none;"><i class="fas fa-map-marker-alt" style="color: #1a94ff; width: 20px;"></i> Sổ địa chỉ</a></li>
                     <li style="margin-bottom: 15px;"><a href="{{ route('orders') }}" style="color: #ee4d2d; text-decoration: none;"><i class="fas fa-clipboard-list" style="color: #1a94ff; width: 20px;"></i> Đơn mua</a></li>
                     <li><a href="{{ route('favorites') }}" style="color: #333; text-decoration: none;"><i class="fas fa-heart" style="color: #1a94ff; width: 20px;"></i> Yêu thích</a></li>
                 </ul>

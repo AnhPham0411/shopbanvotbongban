@@ -20,11 +20,32 @@ class ProductController extends Controller
                                   ->take(4)
                                   ->get();
                                   
-        return view('product.detail', compact('product', 'relatedProducts'));
+        $hasPurchased = false;
+        if (\Illuminate\Support\Facades\Auth::check()) {
+            $hasPurchased = \App\Models\OrderItem::where('product_id', $id)
+                ->whereHas('order', function($q) {
+                    $q->where('user_id', \Illuminate\Support\Facades\Auth::id())
+                      ->where('status', 'completed');
+                })
+                ->exists();
+        }
+                                  
+        return view('product.detail', compact('product', 'relatedProducts', 'hasPurchased'));
     }
 
     public function storeReview(Request $request, $id)
     {
+        $hasPurchased = \App\Models\OrderItem::where('product_id', $id)
+            ->whereHas('order', function($q) {
+                $q->where('user_id', \Illuminate\Support\Facades\Auth::id())
+                  ->where('status', 'completed');
+            })
+            ->exists();
+
+        if (!$hasPurchased) {
+            return redirect()->back()->with('error', 'Bạn phải mua và hoàn thành đơn hàng cho sản phẩm này mới có thể đánh giá!');
+        }
+
         $request->validate([
             'rating' => 'required|integer|min:1|max:5',
             'comment' => 'nullable|string|max:1000'

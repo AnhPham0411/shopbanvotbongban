@@ -71,11 +71,43 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('success', 'Đã xóa sản phẩm khỏi giỏ hàng!');
     }
 
-    public function checkout()
+    public function removeMultiple(Request $request)
     {
         $cart = session('cart', []);
+        $selectedIds = $request->input('selected', []);
+        
+        if (!empty($selectedIds)) {
+            foreach ($selectedIds as $id) {
+                if (isset($cart[$id])) {
+                    unset($cart[$id]);
+                }
+            }
+            session(['cart' => $cart]);
+            return redirect()->route('cart.index')->with('success', 'Đã xóa các sản phẩm đã chọn khỏi giỏ hàng!');
+        }
+        
+        return redirect()->route('cart.index')->with('error', 'Vui lòng chọn ít nhất một sản phẩm để xóa!');
+    }
+
+    public function checkout(Request $request)
+    {
+        $cart = session('cart', []);
+        
+        $selectedIds = $request->query('selected');
+        if (is_array($selectedIds) && count($selectedIds) > 0) {
+            $cart = array_intersect_key($cart, array_flip($selectedIds));
+            session(['selected_cart_items' => $selectedIds]);
+        } else {
+            $selectedIds = session('selected_cart_items');
+            if (is_array($selectedIds) && count($selectedIds) > 0) {
+                $cart = array_intersect_key($cart, array_flip($selectedIds));
+            } else {
+                return redirect()->route('cart.index')->with('error', 'Vui lòng chọn sản phẩm để thanh toán!');
+            }
+        }
+
         if (empty($cart)) {
-            return redirect()->route('home')->with('error', 'Giỏ hàng trống!');
+            return redirect()->route('cart.index')->with('error', 'Giỏ hàng trống hoặc chưa chọn sản phẩm!');
         }
 
         $total = 0;
@@ -110,7 +142,12 @@ class CartController extends Controller
             ->orderBy('min_order_value', 'asc')
             ->get();
 
-        return view('cart.checkout', compact('cart', 'total', 'coupon', 'discountAmount', 'availableCoupons'));
+        $defaultAddress = null;
+        if (Auth::check()) {
+            $defaultAddress = Auth::user()->defaultAddress;
+        }
+
+        return view('cart.checkout', compact('cart', 'total', 'coupon', 'discountAmount', 'availableCoupons', 'defaultAddress'));
     }
 
     public function applyCoupon(Request $request)
@@ -135,6 +172,11 @@ class CartController extends Controller
         }
 
         $cart = session('cart', []);
+        $selectedIds = session('selected_cart_items');
+        if (is_array($selectedIds) && count($selectedIds) > 0) {
+            $cart = array_intersect_key($cart, array_flip($selectedIds));
+        }
+
         $total = 0;
         foreach ($cart as $item) {
             $total += $item['price'] * $item['quantity'];
@@ -171,8 +213,15 @@ class CartController extends Controller
         ]);
 
         $cart = session('cart', []);
+        $selectedIds = session('selected_cart_items');
+        if (is_array($selectedIds) && count($selectedIds) > 0) {
+            $cart = array_intersect_key($cart, array_flip($selectedIds));
+        } else {
+            return redirect()->route('cart.index')->with('error', 'Không có sản phẩm nào được chọn để thanh toán!');
+        }
+
         if (empty($cart)) {
-            return redirect()->route('home')->with('error', 'Giỏ hàng trống!');
+            return redirect()->route('cart.index')->with('error', 'Giỏ hàng trống hoặc chưa chọn sản phẩm!');
         }
 
         $total = 0;
@@ -228,7 +277,12 @@ class CartController extends Controller
             }
 
             DB::commit();
-            session()->forget('cart');
+            $fullCart = session('cart', []);
+            foreach ($cart as $id => $item) {
+                unset($fullCart[$id]);
+            }
+            session(['cart' => $fullCart]);
+            session()->forget('selected_cart_items');
             session()->forget('coupon');
 
             return redirect()->route('checkout.success')->with('success', 'Đặt hàng thành công!');

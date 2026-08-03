@@ -22,6 +22,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'address',
+        'role',
     ];
 
     /**
@@ -45,5 +48,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(UserAddress::class);
+    }
+
+    public function defaultAddress()
+    {
+        return $this->hasOne(UserAddress::class)->where('is_default', true);
     }
 }

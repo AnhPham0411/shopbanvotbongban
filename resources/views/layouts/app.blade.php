@@ -9,6 +9,177 @@
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Dark Mode Core Variables */
+        body.dark-mode {
+            --white-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --border-color: #333;
+            background-color: #121212 !important;
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .app__container,
+        body.dark-mode .cart {
+            background-color: #121212 !important;
+        }
+
+        /* Header Adjustments */
+        body.dark-mode .header {
+            background-image: linear-gradient(0, #1a1a1a, #2c2c2c) !important;
+        }
+        body.dark-mode .header__search-input,
+        body.dark-mode .header__search-history,
+        body.dark-mode .header__search-option-item,
+        body.dark-mode .header__cart-list,
+        body.dark-mode .header__notify,
+        body.dark-mode .header__notify-header,
+        body.dark-mode .header__navbar-user-menu,
+        body.dark-mode .auth-form {
+            background-color: #1f1f1f !important;
+            color: #e0e0e0 !important;
+            border-color: #333 !important;
+        }
+
+        /* Fix missing white texts in header */
+        body.dark-mode .header__navbar-item,
+        body.dark-mode .header__navbar-item-link,
+        body.dark-mode .header__navbar-icon-link,
+        body.dark-mode .header__cart-icon,
+        body.dark-mode .header__search-btn-icon,
+        body.dark-mode .header__navbar-title--no-poiter,
+        body.dark-mode .header__search-select-label,
+        body.dark-mode .header__search-select-icon {
+            color: #e0e0e0 !important;
+        }
+
+        /* Links & Text */
+        body.dark-mode .header__navbar-user-item a,
+        body.dark-mode .header__notify-name,
+        body.dark-mode .header__cart-item-name,
+        body.dark-mode .header__search-history-item a,
+        body.dark-mode .category-item__link,
+        body.dark-mode .category__heading,
+        body.dark-mode .home-product-item__name,
+        body.dark-mode .footer-link,
+        body.dark-mode .footer__heading,
+        body.dark-mode .product-name,
+        body.dark-mode .related-product-item a,
+        body.dark-mode .cart-info h3,
+        body.dark-mode .cart-table th,
+        body.dark-mode .home-produc-item__origin-name,
+        body.dark-mode .product-info p,
+        body.dark-mode .quantity__label,
+        body.dark-mode .home-filter__label,
+        body.dark-mode .select-input__label,
+        body.dark-mode .select-input__link,
+        body.dark-mode .pagination-item__link,
+        body.dark-mode .auth-form__heading,
+        body.dark-mode .header__cart-heading,
+        body.dark-mode .home-filter__page-icon,
+        body.dark-mode .product-description h2,
+        body.dark-mode .description-content {
+            color: #e0e0e0 !important;
+        }
+
+        /* Secondary/muted text */
+        body.dark-mode .home-produc-item__origin,
+        body.dark-mode .home-produc-item__sold,
+        body.dark-mode .home-product-item__price-old,
+        body.dark-mode .header__cart-item-qnt,
+        body.dark-mode .header__cart-item-multiply,
+        body.dark-mode .header__cart-list--no-cart-msg,
+        body.dark-mode .header__notify-descrition,
+        body.dark-mode .home-produc-item__like-icon-empty {
+            color: #aaa !important;
+        }
+
+        body.dark-mode .home-filter__page-btn--disabled .home-filter__page-icon {
+            color: #777 !important;
+        }
+
+        /* Specific Backgrounds */
+        body.dark-mode .home-produc-item,
+        body.dark-mode .category,
+        body.dark-mode .product-detail,
+        body.dark-mode .related-products,
+        body.dark-mode .product-description,
+        body.dark-mode .cart-table,
+        body.dark-mode .home-product-item__img,
+        body.dark-mode .quantity__box input,
+        body.dark-mode .quantity__btn,
+        body.dark-mode .select-input,
+        body.dark-mode .select-input__list,
+        body.dark-mode .pagination-item__link,
+        body.dark-mode .home-filter__page-btn,
+        body.dark-mode .auth-form__input,
+        body.dark-mode .header__search-input {
+            background-color: #1f1f1f !important;
+            border-color: #333 !important;
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .product-description div[style*="background: #f9f9f9"],
+        body.dark-mode .product-description div[style*="background: #fff"] {
+            background-color: #2c2c2c !important;
+            color: #e0e0e0 !important;
+            border-color: #333 !important;
+        }
+
+        body.dark-mode .cart-table thead,
+        body.dark-mode .product-price,
+        body.dark-mode .auth-form__socials,
+        body.dark-mode .quantity__btn:disabled,
+        body.dark-mode .home-filter,
+        body.dark-mode .home-filter__page-btn--disabled {
+            background-color: #2c2c2c !important;
+        }
+        
+        body.dark-mode .quantity__btn:disabled {
+            color: #777 !important;
+        }
+
+        /* Borders */
+        body.dark-mode .cart-table th,
+        body.dark-mode .cart-table td,
+        body.dark-mode .header__cart-item,
+        body.dark-mode .category-item::before,
+        body.dark-mode .cart-table,
+        body.dark-mode .quantity__box,
+        body.dark-mode .quantity__box input,
+        body.dark-mode .auth-form__input,
+        body.dark-mode .header__search-select,
+        body.dark-mode .home-filter__page-btn:first-child {
+            border-color: #333 !important;
+        }
+
+        body.dark-mode .header__navbar-user-menu::before,
+        body.dark-mode .header__notify::after,
+        body.dark-mode .header__cart-list::after {
+            border-color: transparent transparent #1f1f1f transparent !important;
+        }
+
+        /* Hovers */
+        body.dark-mode .header__navbar-user-item a:hover,
+        body.dark-mode .header__notify-item:hover,
+        body.dark-mode .header__cart-item:hover,
+        body.dark-mode .header__search-history-item:hover,
+        body.dark-mode .header__search-option-item:hover,
+        body.dark-mode .cart-table tr:hover,
+        body.dark-mode .category-item__link:hover,
+        body.dark-mode .quantity__btn:hover:not(:disabled),
+        body.dark-mode .select-input__link:hover {
+            background-color: #333 !important;
+        }
+        
+        body.dark-mode .select-input__link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        body.dark-mode .footer__bottom {
+            background-color: #1f1f1f !important;
+        }
+    </style>
 </head>
 <body>
     <div class="app">
@@ -39,7 +210,7 @@
     
                     <ul class="header__navbar-list">
                         <li class="header__navbar-item header__navbar-item--has-notify">
-                            <a href="" class="header__navbar-item-link">
+                            <a href="#" onclick="return false;" class="header__navbar-item-link">
                                 <i class="header__navbar-icon fa-regular fa-bell"></i>
                                 Thông báo
                             </a>
@@ -64,9 +235,15 @@
                             </div>
                         </li>
                         <li class="header__navbar-item">
-                            <a href="" class="header__navbar-item-link">
+                            <a href="{{ route('help_center') }}" class="header__navbar-item-link">
                                 <i class="header__navbar-icon fa-regular fa-circle-question"></i>
                                 Trợ giúp
+                            </a>
+                        </li>
+                        <li class="header__navbar-item">
+                            <a href="#" id="theme-toggle" class="header__navbar-item-link" onclick="return false;">
+                                <i id="theme-icon" class="header__navbar-icon fa-solid fa-moon"></i>
+                                <span id="theme-text">Chế độ tối</span>
                             </a>
                         </li>
                         
@@ -197,33 +374,33 @@
                     <div class="grid__column-2-4">
                         <h3 class="footer__heading">Chăm sóc khách hàng</h3>
                         <ul class="footer__list">
-                            <li class="footer-item"><a href="" class="footer-link">Trung tâm trợ giúp</a></li>
-                            <li class="footer-item"><a href="" class="footer-link">Hướng dẫn mua hàng</a></li>
-                            <li class="footer-item"><a href="" class="footer-link">Hướng dẫn đăng kí đăng nhập</a></li>
+                            <li class="footer-item"><a href="{{ route('help_center') }}" class="footer-link">Trung tâm trợ giúp</a></li>
+                            <li class="footer-item"><a href="{{ route('shopping_guide') }}" class="footer-link">Hướng dẫn mua hàng</a></li>
+                            <li class="footer-item"><a href="{{ route('auth_guide') }}" class="footer-link">Hướng dẫn đăng kí đăng nhập</a></li>
                         </ul>
                     </div>
                     <div class="grid__column-2-4">
                         <h3 class="footer__heading">Giới thiệu</h3>
                         <ul class="footer__list">
-                            <li class="footer-item"><a href="" class="footer-link">Giới thiệu</a></li>
-                            <li class="footer-item"><a href="" class="footer-link">Tuyển dụng</a></li>
-                            <li class="footer-item"><a href="" class="footer-link">Điều khoản</a></li>
+                            <li class="footer-item"><a href="{{ route('about') }}" class="footer-link">Giới thiệu</a></li>
+                            <li class="footer-item"><a href="{{ route('careers') }}" class="footer-link">Tuyển dụng</a></li>
+                            <li class="footer-item"><a href="{{ route('terms') }}" class="footer-link">Điều khoản</a></li>
                         </ul>
                     </div>
                     <div class="grid__column-2-4">
                         <h3 class="footer__heading">Danh mục</h3>
                         <ul class="footer__list">
-                            <li class="footer-item"><a href="" class="footer-link">Cốt vợt</a></li>
-                            <li class="footer-item"><a href="" class="footer-link">Mặt vợt</a></li>
-                            <li class="footer-item"><a href="" class="footer-link">Bóng bàn</a></li>
+                            <li class="footer-item"><a href="{{ route('home', ['keyword' => 'cốt']) }}" class="footer-link">Cốt vợt</a></li>
+                            <li class="footer-item"><a href="{{ route('home', ['keyword' => 'mặt']) }}" class="footer-link">Mặt vợt</a></li>
+                            <li class="footer-item"><a href="{{ route('home', ['keyword' => 'bóng']) }}" class="footer-link">Bóng bàn</a></li>
                         </ul>
                     </div>
                     <div class="grid__column-2-4">
                         <h3 class="footer__heading">Theo dõi</h3>
                         <ul class="footer__list">
-                            <li class="footer-item"><a href="" class="footer-link"><i class="footer-icon fa-brands fa-facebook"></i> Facebook</a></li>
-                            <li class="footer-item"><a href="" class="footer-link"><i class="footer-icon fa-brands fa-instagram"></i> Instagram</a></li>
-                            <li class="footer-item"><a href="" class="footer-link"><i class="footer-icon fa-brands fa-linkedin-in"></i> Linkedin</a></li>
+                            <li class="footer-item"><a href="#" onclick="return false;" class="footer-link"><i class="footer-icon fa-brands fa-facebook"></i> Facebook</a></li>
+                            <li class="footer-item"><a href="#" onclick="return false;" class="footer-link"><i class="footer-icon fa-brands fa-instagram"></i> Instagram</a></li>
+                            <li class="footer-item"><a href="#" onclick="return false;" class="footer-link"><i class="footer-icon fa-brands fa-linkedin-in"></i> Linkedin</a></li>
                         </ul>   
                     </div>
                     <div class="grid__column-2-4">
@@ -262,5 +439,43 @@
             alert("{{ session('error') }}");
         </script>
     @endif
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+            
+            // Check for saved theme
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                themeText.innerText = 'Chế độ sáng';
+            }
+    
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.body.classList.toggle('dark-mode');
+                    let theme = 'light';
+                    
+                    if (document.body.classList.contains('dark-mode')) {
+                        theme = 'dark';
+                        themeIcon.classList.remove('fa-moon');
+                        themeIcon.classList.add('fa-sun');
+                        themeText.innerText = 'Chế độ sáng';
+                    } else {
+                        themeIcon.classList.remove('fa-sun');
+                        themeIcon.classList.add('fa-moon');
+                        themeText.innerText = 'Chế độ tối';
+                    }
+                    
+                    localStorage.setItem('theme', theme);
+                });
+            }
+        });
+    </script>
 </body>
 </html>

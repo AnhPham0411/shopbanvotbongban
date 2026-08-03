@@ -7,6 +7,12 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\AuthController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/help-center', [HomeController::class, 'helpCenter'])->name('help_center');
+Route::get('/shopping-guide', [HomeController::class, 'shoppingGuide'])->name('shopping_guide');
+Route::get('/auth-guide', [HomeController::class, 'authGuide'])->name('auth_guide');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/careers', [HomeController::class, 'careers'])->name('careers');
+Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
 
 Route::get('/product/{id}', [ProductController::class, 'detail'])->name('product.detail');
 
@@ -15,6 +21,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
     Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
     Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+    Route::post('/cart/remove-multiple', [CartController::class, 'removeMultiple'])->name('cart.remove_multiple');
     Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
     Route::post('/checkout', [CartController::class, 'placeOrder'])->name('checkout.place');
     Route::get('/order-success', [CartController::class, 'success'])->name('checkout.success');
@@ -33,6 +40,13 @@ Route::middleware(['auth'])->group(function () {
     // Favorites
     Route::get('/favorites', [\App\Http\Controllers\FavoriteController::class, 'index'])->name('favorites');
     Route::post('/favorites/toggle/{id}', [\App\Http\Controllers\FavoriteController::class, 'toggle'])->name('favorites.toggle');
+
+    // Addresses
+    Route::get('/addresses', [\App\Http\Controllers\UserAddressController::class, 'index'])->name('addresses.index');
+    Route::post('/addresses', [\App\Http\Controllers\UserAddressController::class, 'store'])->name('addresses.store');
+    Route::put('/addresses/{id}', [\App\Http\Controllers\UserAddressController::class, 'update'])->name('addresses.update');
+    Route::delete('/addresses/{id}', [\App\Http\Controllers\UserAddressController::class, 'destroy'])->name('addresses.destroy');
+    Route::put('/addresses/{id}/default', [\App\Http\Controllers\UserAddressController::class, 'setDefault'])->name('addresses.set_default');
 });
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');

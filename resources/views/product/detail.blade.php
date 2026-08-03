@@ -145,25 +145,31 @@
         <h2>Đánh giá sản phẩm ({{ $product->reviews->count() }})</h2>
         
         @auth
-        <div style="margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee;">
-            <form action="{{ route('product.review', $product->id) }}" method="POST">
-                @csrf
-                <div style="margin-bottom: 15px;">
-                    <label style="display: block; font-weight: bold; margin-bottom: 5px; font-size: 1.4rem;">Chọn số sao:</label>
-                    <div style="font-size: 1.5rem; cursor: pointer;">
-                        <input type="radio" name="rating" value="5" id="rate-5" checked> <label for="rate-5" style="margin-right: 15px;">5 <i class="fa-solid fa-star" style="color: #ffc107;"></i></label>
-                        <input type="radio" name="rating" value="4" id="rate-4"> <label for="rate-4" style="margin-right: 15px;">4 <i class="fa-solid fa-star" style="color: #ffc107;"></i></label>
-                        <input type="radio" name="rating" value="3" id="rate-3"> <label for="rate-3" style="margin-right: 15px;">3 <i class="fa-solid fa-star" style="color: #ffc107;"></i></label>
-                        <input type="radio" name="rating" value="2" id="rate-2"> <label for="rate-2" style="margin-right: 15px;">2 <i class="fa-solid fa-star" style="color: #ffc107;"></i></label>
-                        <input type="radio" name="rating" value="1" id="rate-1"> <label for="rate-1">1 <i class="fa-solid fa-star" style="color: #ffc107;"></i></label>
+            @if($hasPurchased)
+            <div style="margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee;">
+                <form action="{{ route('product.review', $product->id) }}" method="POST">
+                    @csrf
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; font-weight: bold; margin-bottom: 5px; font-size: 1.4rem;">Chọn số sao:</label>
+                        <div style="font-size: 1.5rem; cursor: pointer;">
+                            <input type="radio" name="rating" value="5" id="rate-5" checked> <label for="rate-5" style="margin-right: 15px;">5 <i class="fa-solid fa-star" style="color: #ffc107;"></i></label>
+                            <input type="radio" name="rating" value="4" id="rate-4"> <label for="rate-4" style="margin-right: 15px;">4 <i class="fa-solid fa-star" style="color: #ffc107;"></i></label>
+                            <input type="radio" name="rating" value="3" id="rate-3"> <label for="rate-3" style="margin-right: 15px;">3 <i class="fa-solid fa-star" style="color: #ffc107;"></i></label>
+                            <input type="radio" name="rating" value="2" id="rate-2"> <label for="rate-2" style="margin-right: 15px;">2 <i class="fa-solid fa-star" style="color: #ffc107;"></i></label>
+                            <input type="radio" name="rating" value="1" id="rate-1"> <label for="rate-1">1 <i class="fa-solid fa-star" style="color: #ffc107;"></i></label>
+                        </div>
                     </div>
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <textarea name="comment" rows="4" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1.4rem;" placeholder="Nhập bình luận của bạn về sản phẩm này..."></textarea>
-                </div>
-                <button type="submit" style="background: #ee4d2d; color: #fff; border: none; padding: 10px 20px; border-radius: 4px; font-size: 1.4rem; cursor: pointer; font-weight: 500;">Gửi đánh giá</button>
-            </form>
-        </div>
+                    <div style="margin-bottom: 15px;">
+                        <textarea name="comment" rows="4" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1.4rem;" placeholder="Nhập bình luận của bạn về sản phẩm này..."></textarea>
+                    </div>
+                    <button type="submit" style="background: #ee4d2d; color: #fff; border: none; padding: 10px 20px; border-radius: 4px; font-size: 1.4rem; cursor: pointer; font-weight: 500;">Gửi đánh giá</button>
+                </form>
+            </div>
+            @else
+            <div style="margin-bottom: 30px; padding: 15px; background: #f9f9f9; border-radius: 4px; font-size: 1.4rem;">
+                Bạn cần mua và hoàn thành đơn hàng cho sản phẩm này để có thể gửi đánh giá.
+            </div>
+            @endif
         @else
         <div style="margin-bottom: 30px; padding: 15px; background: #f9f9f9; border-radius: 4px; font-size: 1.4rem;">
             Vui lòng <a href="{{ route('login') }}" style="color: #ee4d2d; font-weight: bold; text-decoration: none;">đăng nhập</a> để gửi đánh giá.

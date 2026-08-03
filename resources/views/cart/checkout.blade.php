@@ -19,14 +19,25 @@
             <h2>Thông tin nhận hàng</h2>
             <form action="{{ route('checkout.place') }}" method="POST">
                 @csrf
+                @php
+                    $fullName = Auth::check() ? Auth::user()->name : '';
+                    $phone = Auth::check() ? Auth::user()->phone : '';
+                    $userAddress = Auth::check() ? Auth::user()->address : '';
+
+                    if (isset($defaultAddress) && $defaultAddress) {
+                        $fullName = $defaultAddress->name;
+                        $phone = $defaultAddress->phone;
+                        $userAddress = $defaultAddress->address;
+                    }
+                @endphp
                 <label>Họ và tên</label>
-                <input type="text" name="fullName" value="{{ Auth::check() ? Auth::user()->name : '' }}" required>
+                <input type="text" name="fullName" value="{{ $fullName }}" required>
 
                 <label>Số điện thoại</label>
-                <input type="text" name="phone" value="{{ Auth::check() ? Auth::user()->phone : '' }}" required>
+                <input type="text" name="phone" value="{{ $phone }}" required>
 
                 <label>Địa chỉ nhận hàng</label>
-                <textarea name="address" required>{{ Auth::check() ? Auth::user()->address : '' }}</textarea>
+                <textarea name="address" required>{{ $userAddress }}</textarea>
                 
                 <label>Phương thức thanh toán</label>
                 <select name="paymentMethod" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 15px;">
