@@ -139,6 +139,80 @@
             color: #777 !important;
         }
 
+        /* Static Pages (Help, About, Terms, etc.) */
+        body.dark-mode .grid > div[style*="background-color: #fff"] {
+            background-color: #1f1f1f !important;
+            color: #e0e0e0 !important;
+            box-shadow: none !important;
+            border: 1px solid #333 !important;
+        }
+
+        body.dark-mode .grid > div[style*="background-color: #fff"] div[style*="color: #333"],
+        body.dark-mode .grid > div[style*="background-color: #fff"] h2[style*="color: #555"],
+        body.dark-mode .grid > div[style*="background-color: #fff"] h3[style*="color: #555"],
+        body.dark-mode .grid > div[style*="background-color: #fff"] p,
+        body.dark-mode .grid > div[style*="background-color: #fff"] li {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .grid > div[style*="background-color: #fff"] h1 {
+            border-bottom-color: #333 !important;
+        }
+
+        body.dark-mode div[style*="background: #f8f9fa"] {
+            background-color: #2c2c2c !important;
+            color: #e0e0e0 !important;
+        }
+
+        /* User Dashboard / Profile Pages */
+        body.dark-mode .grid__column-2 > div[style*="background-color: #fff"],
+        body.dark-mode .grid__column-10 > div[style*="background-color: #fff"] {
+            background-color: #1f1f1f !important;
+            color: #e0e0e0 !important;
+            box-shadow: none !important;
+            border: 1px solid #333 !important;
+        }
+
+        body.dark-mode .grid__column-2 a,
+        body.dark-mode .grid__column-2 div,
+        body.dark-mode .grid__column-10 h2,
+        body.dark-mode .grid__column-10 span[style*="color: #333"],
+        body.dark-mode .grid__column-10 div[style*="color: #333"],
+        body.dark-mode .grid__column-10 div[style*="color: #555"] {
+            color: #e0e0e0 !important;
+        }
+        
+        body.dark-mode .grid__column-2 a[style*="color: #ee4d2d"] {
+            color: var(--primary-color) !important;
+        }
+
+        body.dark-mode div[style*="border-bottom: 1px solid #efefef"],
+        body.dark-mode div[style*="border-bottom: 1px solid #e0e0e0"],
+        body.dark-mode div[style*="border-bottom: 1px solid #f0f0f0"] {
+            border-bottom-color: #333 !important;
+        }
+        
+        body.dark-mode div[style*="border: 1px solid #e0e0e0"] {
+            border-color: #333 !important;
+        }
+        
+        body.dark-mode div[style*="background-color: #fafafa"] {
+            background-color: #2c2c2c !important;
+            border-bottom-color: #333 !important;
+        }
+        
+        body.dark-mode input[style*="background-color: #f5f5f5"] {
+            background-color: #2c2c2c !important;
+            color: #aaa !important;
+            border-color: #444 !important;
+        }
+        
+        body.dark-mode input[style*="border: 1px solid #ccc"] {
+            background-color: #1f1f1f !important;
+            border-color: #333 !important;
+            color: #e0e0e0 !important;
+        }
+
         /* Borders */
         body.dark-mode .cart-table th,
         body.dark-mode .cart-table td,
